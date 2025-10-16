@@ -1,0 +1,55 @@
+ <!DOCTYPE html>
+<html>
+<head>
+    <title>Quiz</title>
+    <meta charset="UTF-8">
+    <script src="main.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Logos Hope Quiz</h1>
+    <div>
+        <h2 id="title">Question 1</h2>
+        <form>
+            <h3 id="question">Was ist Logos Hope?</h3>
+            
+            <div id="options">
+                <label>
+                    <input id="option1" type="radio" name="option">
+                    a
+                </label><br>
+                
+                <label>
+                    <input id="option2" type="radio" name="option">
+                    b
+                </label><br>
+                
+                <label>
+                    <input id="option3" type="radio" name="option">
+                    c
+                </label><br>
+    
+                <label>
+                    <input id="option4" type="radio" name="option">
+                    d
+                </label><br>
+            </div>    
+
+            <div id="modalSelectAnswer">
+                <p>Please select an answer!</p>
+                <button onclick="document.getElementById('modalSelectAnAnswer').classList.remove('visible')">OK</button>
+            </div>
+            <div id="modalWrongAnswer">
+                <p>Wrong! The correct answer is: <span id="correctAnswerText"></span></p>
+                <button onclick="nextQuestion()">Next Question</button>
+            </div>
+            <div id="modalCorrectAnswer">
+                <p>Correct!</p>
+                <button onclick="nextQuestion()">Next Question</button>
+            </div>
+
+            <button type="button" onclick="checkAnswer()">Antwort senden</button>
+        </form>
+    </div>
+</body>
+</html>
