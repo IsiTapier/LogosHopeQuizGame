@@ -21,13 +21,28 @@ const questions = {
     19: {question: "How can you stay updated on the Logos Hope's journey?", answer: "By following their website and social media", wrong_answers: ["By guessing", "By asking random people", "By ignoring it"]},
 };
 
-currectQuestionIndex = 0;
+selectedQuestions = [];
+currentQuestionIndex = 0;
+correctAnswersCount = 0;
 
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [array[i], array[j]] = [array[j], array[i]];
     }
+}
+
+function getRandomQuestions(amount = 10) {
+    const keys = Object.keys(questions);
+    const selectedKeys = [];
+    while (selectedKeys.length < amount) {
+        const randomIndex = Math.floor(Math.random() * keys.length);
+        const key = keys[randomIndex];
+        if (!selectedKeys.includes(key)) {
+            selectedKeys.push(key);
+        }
+    }
+    return selectedKeys.map(key => questions[key]);
 }
 
 function showSelectAnswerModal() {
@@ -43,15 +58,42 @@ function showWrongModal(correctText) {
     document.getElementById("modalWrongAnswer").classList.add("visible");
 }
 
+function showModalEndGame() {
+    document.getElementById("modalEndGame").classList.add("visible");
+    document.getElementById("correctAnswersCount").textContent = correctAnswersCount;
+}
+
+function newGame() {
+    console.log("Starting new game...");
+    selectedQuestions = getRandomQuestions(10);
+    currentQuestionIndex = 0;
+    correctAnswersCount = 0;
+    document.getElementById("scoreValue").textContent = correctAnswersCount;
+    document.getElementById("modalEndGame").classList.remove("visible");
+    document.getElementById("modalSelectAnswer").classList.remove("visible");
+    document.getElementById("modalCorrectAnswer").classList.remove("visible");
+    document.getElementById("modalWrongAnswer").classList.remove("visible");
+    loadQuestion(currentQuestionIndex);
+}
+
 function nextQuestion() {
     document.getElementById("modalCorrectAnswer").classList.remove("visible");
     document.getElementById("modalWrongAnswer").classList.remove("visible");
-    currectQuestionIndex = Math.round(Math.random()*(Object.keys(questions).length-1));
-    loadQuestion(currectQuestionIndex);
+    const radios = document.querySelectorAll('input[name="option"]');
+    radios.forEach(radio => radio.checked = false);
+    // currentQuestionIndex = Math.round(Math.random()*(Object.keys(questions).length-1));
+    currentQuestionIndex++;
+    console.log("Next question index: " + currentQuestionIndex);
+    if (currentQuestionIndex >= selectedQuestions.length) {
+        showModalEndGame();
+        return;
+    }
+    loadQuestion(currentQuestionIndex);
 }
 
 function loadQuestion(index) {
-    const questionData = questions[index];
+    document.getElementById('title').innerHTML = `Question ${index + 1} of ${selectedQuestions.length}`;
+    const questionData = selectedQuestions[index];
 
     const question = document.getElementById('question');
     
@@ -74,7 +116,8 @@ function loadQuestion(index) {
 
 }
 
-function checkAnswer() {
+function checkAnswer(event) {
+    event.preventDefault()
     const selectedAnswer = document.querySelector('input[id="option1"]:checked, input[id="option2"]:checked, input[id="option3"]:checked, input[id="option4"]:checked');
     if (!selectedAnswer) {
         showSelectAnswerModal()
@@ -83,13 +126,15 @@ function checkAnswer() {
     console.log("Selected answer: " + selectedAnswer.value);
     console.log("Checking answer...");
 
-    if(selectedAnswer.value === questions[currectQuestionIndex].answer) {
+    if(selectedAnswer.value === selectedQuestions[currentQuestionIndex].answer) {
         showCorrectModal();
+        correctAnswersCount++;
+        document.getElementById("scoreValue").textContent = correctAnswersCount;
     } else {
-        showWrongModal(questions[currectQuestionIndex].answer);
+        showWrongModal(selectedQuestions[currentQuestionIndex].answer);
     }
 }
 
 window.onload = function() {
-  nextQuestion();
+  newGame();
 }

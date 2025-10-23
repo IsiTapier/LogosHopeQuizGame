@@ -10,7 +10,8 @@
     <h1>Logos Hope Quiz</h1>
     <div>
         <h2 id="title">Question 1</h2>
-        <form>
+        <div id="formContainer">
+
             <h3 id="question">Was ist Logos Hope?</h3>
             
             <div id="options">
@@ -47,9 +48,17 @@
                 <p>Correct!</p>
                 <button onclick="nextQuestion()">Next Question</button>
             </div>
+            <div id="modalEndGame">
+                <p>Game Over! You answered <span id="correctAnswersCount"></span> out of 10 questions correctly.</p>
+                <button onclick="newGame()">New Game</button>
+            </div>
 
-            <button type="button" onclick="checkAnswer()">Antwort senden</button>
-        </form>
+            <button type="button" onclick="checkAnswer(event)">Antwort senden</button>
+        </div>
+
+        <div íd="score">
+            <p>Score: <span id="scoreValue">0</span></p>
+        </div>
     </div>
 </body>
 </html>
