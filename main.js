@@ -1,6 +1,6 @@
 const questions = {
     0: {question: "What is the Logos Hope?", answer: "The world's largest floating book fair.", wrong_answers: ["A cruise ship", "A cargo ship", "A fishing boat"]},
-    1: {question: "Where is the Logos Hope currently located?", answer: "Germany", wrong_answers: ["USA", "Brazil", "India"]},
+    1: {question: "Where is the Logos Hope based?", answer: "Germany", wrong_answers: ["USA", "UK", "Netherlands"]},
     2: {question: "How many books does the Logos Hope carry?", answer: "Over 5,000 titles", wrong_answers: ["500 titles", "1,000 titles", "10,000 titles"]},
     3: {question: "What is the main purpose of the Logos Hope?", answer: "To share knowledge and culture through books", wrong_answers: ["To provide luxury cruises", "To conduct scientific research", "To transport goods"]},
     4: {question: "Who operates the Logos Hope?", answer: "GBA Ships", wrong_answers: ["NASA", "UNESCO", "Red Cross"]},
@@ -19,6 +19,9 @@ const questions = {
     17: {question: "How does the Logos Hope contribute to local communities?", answer: "Through educational programs and community outreach", wrong_answers: ["By taking resources away", "By ignoring local needs", "By competing with local businesses"]},
     18: {question: "What is the significance of the Logos Hope's book fair?", answer: "It provides access to knowledge and culture for people who may not have it otherwise", wrong_answers: ["It's just for entertainment", "It's a way to make money", "It's a way to promote certain ideologies"]},
     19: {question: "How can you stay updated on the Logos Hope's journey?", answer: "By following their website and social media", wrong_answers: ["By guessing", "By asking random people", "By ignoring it"]},
+    20: {question: "What makes the Logos Hope unique?", answer: "It's the largest floating book fair in the world", wrong_answers: ["It's the fastest ship", "It's the most luxurious ship", "It's the oldest ship"]},
+    21: {question: "What kind of volunteers does the Logos Hope accept?", answer: "People from all walks of life with a passion for service", wrong_answers: ["Only experienced sailors", "Only academics", "Only wealthy individuals"]},
+    22: {question: "What is the duration of a typical volunteer stint on the Logos Hope?", answer: "Several months", wrong_answers: ["One week", "One year", "One day"]},
 };
 
 selectedQuestions = [];
